@@ -4,6 +4,11 @@
 { config, pkgs, ... }:
 
 {
+
+  # Use systemd-boot on all UEFI machines
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   # Set Swedish keyboard layout for graphical sessions and the console
   services.xserver.layout = "se";
   console.keyMap = "sv-latin1";
