@@ -1,0 +1,12 @@
+[global]
+    monitor = 0
+    follow = mouse
+    geometry = "300x5-30+20"
+    indicate_hidden = yes
+    shrink = no
+    padding = 8
+    horizontal_padding = 8
+    font = FiraCode Nerd Font 10
+    frame_width = 2
+    frame_color = "#44475a"
+    separator_color = frame

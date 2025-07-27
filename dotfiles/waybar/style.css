@@ -1,0 +1,25 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: FiraCode Nerd Font;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: #282a36;
+    color: #f8f8f2;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #f8f8f2;
+}
+
+#workspaces button.active {
+    background-color: #44475a;
+}
+
+#clock, #pulseaudio, #network, #tray {
+    padding: 0 10px;
+}
