@@ -16,6 +16,7 @@
     isNormalUser = true;
     description = "Martin";
     extraGroups = [ "networkmanager" "wheel" ]; # 'wheel' allows sudo
+    shell = pkgs.fish;
   };
 
   # Allow unfree packages on all systems
