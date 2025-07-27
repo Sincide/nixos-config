@@ -16,6 +16,7 @@
 
   # Enable networking. While this could be common, keeping it here is fine.
   networking.networkmanager.enable = true;
+  services.openssh.enable = true;  
 
   # Enable system-wide support for compositors.
   programs.hyprland.enable = true;
