@@ -10,7 +10,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Set Swedish keyboard layout for graphical sessions and the console
-  services.xserver.layout = "se";
+  services.xserver.xkb.layout = "se";
   console.keyMap = "sv-latin1";
 
   # Set your time zone.

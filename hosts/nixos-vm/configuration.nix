@@ -11,8 +11,8 @@
   networking.hostName = "nixos";
 
   # Bootloader settings are often machine-specific.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
+ # boot.loader.grub.enable = true;
+ # boot.loader.grub.device = "/dev/vda";
 
   # Enable networking. While this could be common, keeping it here is fine.
   networking.networkmanager.enable = true;
