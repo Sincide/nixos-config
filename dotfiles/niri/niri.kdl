@@ -1,0 +1,17 @@
+// Niri configuration file in KDL format.
+// See https://github.com/YaLTeR/niri/blob/main/doc/config.kdl for all options.
+
+// Set a modifier key. "Super" is the Windows/Command key.
+modifiers "Super"
+
+// Define some basic keybindings.
+binds {
+    // Super + Return to open a terminal.
+    "Return" spawn "kitty"
+
+    // Super + Q to close the focused window.
+    "q" close-window
+
+    // Super + Shift + Q to exit Niri.
+    "Shift+q" exit
+}
