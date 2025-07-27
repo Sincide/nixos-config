@@ -11,6 +11,9 @@
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
 
+    # Enable the fish shell program module
+  programs.fish.enable = true;
+
   # Define your user account here so it exists on all machines
   users.users.martin = {
     isNormalUser = true;
