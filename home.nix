@@ -55,7 +55,7 @@
     enable = true;
     shellAliases = {
       ll = "ls -l";
-      update = "sudo nixos-rebuild switch --flake ~/nixos-config/#nixos-vm";
+      update = "sudo nixos-rebuild switch --flake ~/nixos-config/#nixos";
     };
   };
   programs.home-manager.enable = true;
