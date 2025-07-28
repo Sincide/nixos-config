@@ -50,6 +50,17 @@
   # Enable Fish shell
   programs.fish.enable = true;
 
+  # Git configuration
+  programs.git = {
+    enable = true;
+    userName = "Martin";  # Replace with your name
+    userEmail = "your-email@example.com";  # Replace with your email
+    extraConfig = {
+      init.defaultBranch = "main";
+      pull.rebase = false;
+    };
+  };
+
   # Your existing bash and home-manager config
   programs.bash = {
     enable = true;

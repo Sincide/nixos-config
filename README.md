@@ -47,6 +47,10 @@ The most important step - generate your machine's hardware configuration:
 ```bash
 # Generate hardware config for your specific machine (needs sudo)
 sudo nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix
+
+# CRITICAL: Add the hardware config to Git (flakes require this!)
+git add hosts/nixos/hardware-configuration.nix
+git commit -m "Add hardware configuration for this machine"
 ```
 
 ### Step 4: Update User Configuration (If Needed)
@@ -55,7 +59,11 @@ If your username is not "martin", you need to update the configuration:
 
 1. Edit `hosts/common.nix` line 26 to change the username
 2. Edit `flake.nix` line 20 to update the home-manager user
-3. Edit `home.nix` line 58 to update the rebuild alias
+3. Edit `home.nix` line 69 to update the rebuild alias
+
+**Also update your Git configuration in `home.nix`:**
+- Line 56: Change `userName = "Martin"` to your name
+- Line 57: Change `userEmail = "your-email@example.com"` to your email
 
 ### Step 5: Apply the Configuration
 
@@ -75,6 +83,33 @@ sudo reboot
 ```
 
 After reboot, you should have a fully functional Hyprland desktop environment!
+
+## Deploying to Your Production Machine
+
+Once you've tested in a VM and everything works, here's how to deploy to your real machine:
+
+### Option 1: Clean Install (Recommended)
+1. **Fresh NixOS install** on your production PC (same "no desktop" option)
+2. **Clone your repo** with the updated configuration (including VM-tested changes)
+3. **Generate new hardware config** for the production machine:
+   ```bash
+   sudo nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix
+   git add hosts/nixos/hardware-configuration.nix
+   git commit -m "Add production machine hardware configuration"
+   ```
+4. **Deploy**: `sudo nixos-rebuild switch --flake .#nixos`
+
+### Option 2: Push VM Changes First
+If you made changes during VM testing:
+1. **In your VM**: Push any configuration tweaks you made
+   ```bash
+   git add .
+   git commit -m "Final configuration tweaks from VM testing"
+   git push
+   ```
+2. **On production machine**: Pull the latest changes, then follow Option 1
+
+**Important**: Each machine needs its own `hardware-configuration.nix` - never copy this file between machines!
 
 ## Post-Installation
 
@@ -130,6 +165,7 @@ nixos-config/
 
 ### Build Fails
 - Check that `hardware-configuration.nix` exists in `hosts/nixos/`
+- **CRITICAL**: Ensure the hardware config is committed to Git (`git status` should show no untracked files)
 - Ensure you're running as root or with `sudo`
 - Try adding `--show-trace` to see detailed error messages
 
@@ -153,6 +189,9 @@ nixos-config/
 
 ### Adding Packages
 Add packages to `home.nix` in the `home.packages` section.
+
+### Git Configuration
+Your Git username and email are configured declaratively in `home.nix`. No need to run `git config` commands manually!
 
 ### Desktop Tweaks
 - Hyprland: Edit `dotfiles/hypr/hyprland.conf`
