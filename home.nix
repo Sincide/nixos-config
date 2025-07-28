@@ -3,6 +3,9 @@
 {
   home.stateVersion = "25.05";
 
+  # Allow unfree packages (needed for claude-code)
+  nixpkgs.config.allowUnfree = true;
+
   # 1. INSTALL THE PACKAGES
   # ========================
   home.packages = with pkgs; [
