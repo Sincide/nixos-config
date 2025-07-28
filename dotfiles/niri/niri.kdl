@@ -18,6 +18,9 @@ binds {
     // Super + Q to close the focused window.
     "q" close-window
 
+    // Super + E to open file manager.
+    "e" spawn "nemo"
+
     // Super + Shift + Q to exit Niri.
     "Shift+q" exit
 }

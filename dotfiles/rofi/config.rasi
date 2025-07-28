@@ -15,4 +15,5 @@ configuration {
     sidebar-mode: true;
 }
 
+// Default theme (will be overwritten by matugen-generated colors)
 @theme "colors"

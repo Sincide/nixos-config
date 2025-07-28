@@ -42,6 +42,18 @@
     
     # Image manipulation for wallpaper thumbnails
     imagemagick
+    
+    # File manager with archive support
+    nemo-with-extensions
+    file-roller # Archive manager
+    
+    # Archive/compression support
+    p7zip
+    unzip
+    unrar
+    
+    # Disk management
+    gnome-disk-utility
   ];
 
 
@@ -114,10 +126,27 @@
     enable = true;
     variant = "dark";
     jsonFormat = "hex";
-    # Using built-in templates - matugen provides defaults for most applications
     templates = {
-      # Built-in templates will be used automatically for supported applications
-      # kitty, waybar, hyprland, rofi, dunst are all supported by default
+      kitty = {
+        input_path = ./templates/kitty.conf;
+        output_path = "~/.config/kitty/colors.conf";
+      };
+      waybar = {
+        input_path = ./templates/waybar-colors.css;
+        output_path = "~/.config/waybar/colors.css";
+      };
+      rofi = {
+        input_path = ./templates/rofi-colors.rasi;
+        output_path = "~/.config/rofi/colors.rasi";
+      };
+      hyprland = {
+        input_path = ./templates/hyprland-colors.conf;
+        output_path = "~/.config/hypr/colors.conf";
+      };
+      dunst = {
+        input_path = ./templates/dunst-colors;
+        output_path = "~/.config/dunst/colors.conf";
+      };
     };
   };
 }
