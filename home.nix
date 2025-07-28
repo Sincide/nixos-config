@@ -54,7 +54,7 @@
   programs.git = {
     enable = true;
     userName = "Martin";  # Replace with your name
-    userEmail = "your-email@example.com";  # Replace with your email
+    userEmail = "martin.erman@gmail.com";  # Replace with your email
     extraConfig = {
       init.defaultBranch = "main";
       pull.rebase = false;
