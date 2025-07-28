@@ -24,22 +24,19 @@ This repository contains a complete NixOS configuration with Hyprland desktop en
 
 ### Step 1: Initial System Setup
 
-First, ensure you have git and can edit files:
+First, ensure you have git available:
 
 ```bash
-# Become root for system changes
-sudo su
-
-# Install git if not available
+# Install git if not available (run as normal user)
 nix-shell -p git
 ```
 
 ### Step 2: Clone This Repository
 
 ```bash
-# Clone to your home directory
-cd /home/martin  # Replace 'martin' with your username if different
-git clone https://github.com/yourusername/nixos-config.git  # Replace with your repo URL
+# Clone to your home directory (as normal user)
+cd ~  # Go to your home directory
+git clone git@gitlab.com:marerm/nixos-config.git  # Replace with your repo URL if different
 cd nixos-config
 ```
 
@@ -48,7 +45,7 @@ cd nixos-config
 The most important step - generate your machine's hardware configuration:
 
 ```bash
-# Generate hardware config for your specific machine
+# Generate hardware config for your specific machine (needs sudo)
 sudo nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix
 ```
 
@@ -63,7 +60,7 @@ If your username is not "martin", you need to update the configuration:
 ### Step 5: Apply the Configuration
 
 ```bash
-# Rebuild with your new configuration
+# Rebuild with your new configuration (needs sudo)
 sudo nixos-rebuild switch --flake .#nixos
 
 # If you encounter any issues, try:
@@ -73,6 +70,7 @@ sudo nixos-rebuild switch --flake .#nixos --show-trace
 ### Step 6: Reboot
 
 ```bash
+# Reboot to apply changes (needs sudo)
 sudo reboot
 ```
 
