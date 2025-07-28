@@ -1,41 +1,19 @@
 /* Matugen generated colors for Waybar */
-:root {
-    --surface: @{colors.surface};
-    --surface-dim: @{colors.surface_dim};
-    --surface-bright: @{colors.surface_bright};
-    --surface-container: @{colors.surface_container};
-    --surface-container-low: @{colors.surface_container_low};
-    --surface-container-high: @{colors.surface_container_high};
-    --surface-container-highest: @{colors.surface_container_highest};
-    
-    --on-surface: @{colors.on_surface};
-    --on-surface-variant: @{colors.on_surface_variant};
-    
-    --primary: @{colors.primary};
-    --on-primary: @{colors.on_primary};
-    --primary-container: @{colors.primary_container};
-    --on-primary-container: @{colors.on_primary_container};
-    
-    --secondary: @{colors.secondary};
-    --on-secondary: @{colors.on_secondary};
-    --secondary-container: @{colors.secondary_container};
-    --on-secondary-container: @{colors.on_secondary_container};
-    
-    --tertiary: @{colors.tertiary};
-    --on-tertiary: @{colors.on_tertiary};
-    --tertiary-container: @{colors.tertiary_container};
-    --on-tertiary-container: @{colors.on_tertiary_container};
-    
-    --error: @{colors.error};
-    --on-error: @{colors.on_error};
-    --error-container: @{colors.error_container};
-    --on-error-container: @{colors.on_error_container};
-    
-    --outline: @{colors.outline};
-    --outline-variant: @{colors.outline_variant};
-    --shadow: @{colors.shadow};
-    --scrim: @{colors.scrim};
-    --inverse-surface: @{colors.inverse_surface};
-    --inverse-on-surface: @{colors.inverse_on_surface};
-    --inverse-primary: @{colors.inverse_primary};
+window#waybar {
+    background-color: @{colors.surface};
+    color: @{colors.on_surface};
+}
+
+#workspaces button {
+    background-color: transparent;
+    color: @{colors.on_surface};
+}
+
+#workspaces button.active {
+    background-color: @{colors.primary};
+    color: @{colors.on_primary};
+}
+
+#clock, #pulseaudio, #network, #tray {
+    color: @{colors.on_surface};
 }

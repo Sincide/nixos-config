@@ -1,5 +1,5 @@
 configuration {
-    modes: "drun,run,window,wallpaper:~/.local/bin/wallpaper-selector";
+    modes: "drun,run,window";
     icon-theme: "Papirus";
     show-icons: true;
     terminal: "kitty";
@@ -10,8 +10,6 @@ configuration {
     display-drun: "   Apps ";
     display-run: "   Run ";
     display-window: " 﩯  Window";
-    display-Network: " 󰤨  Network";
-    display-wallpaper: " 🖼️  Wallpapers";
     sidebar-mode: true;
 }
 
