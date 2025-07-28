@@ -8,6 +8,9 @@
   # Set the hostname for this machine
   networking.hostName = "nixos";
 
+  # Enable networking
+  networking.networkmanager.enable = true;
+
   # Enable system-wide support for compositors.
   programs.hyprland.enable = true;
   programs.niri.enable = true;
