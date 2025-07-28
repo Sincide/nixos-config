@@ -54,6 +54,9 @@
     
     # Disk management
     gnome-disk-utility
+    
+    # For downloading wallpapers
+    curl
   ];
 
 
