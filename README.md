@@ -24,11 +24,15 @@ This repository contains a complete NixOS configuration with Hyprland desktop en
 
 ### Step 1: Initial System Setup
 
-First, ensure you have git available:
+First, ensure you have git available and optionally set up Cachix for faster Claude Code downloads:
 
 ```bash
 # Install git if not available (run as normal user)
 nix-shell -p git
+
+# Optional: Set up Cachix for faster Claude Code downloads
+nix-env -iA cachix -f https://cachix.org/api/v1/install
+cachix use claude-code
 ```
 
 ### Step 2: Clone This Repository

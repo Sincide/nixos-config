@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.stateVersion = "25.05";
@@ -10,6 +10,9 @@
     neofetch
     htop
     git
+
+    # Development tools
+    claude-code # AI coding assistant (community package with daily updates)
 
     # Wayland Compositor & Bar
     hyprland # Provides hypr
@@ -70,4 +73,21 @@
     };
   };
   programs.home-manager.enable = true;
+
+  # Claude Code stable link and config preservation
+  home.activation.claudeStableLink = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p $HOME/.local/bin
+    rm -f $HOME/.local/bin/claude
+    ln -s ${pkgs.claude-code}/bin/claude $HOME/.local/bin/claude
+  '';
+
+  home.sessionPath = [ "$HOME/.local/bin" ];
+  
+  home.activation.preserveClaudeConfig = lib.hm.dag.entryBefore ["writeBoundary"] ''
+    [ -f "$HOME/.claude.json" ] && cp -p "$HOME/.claude.json" "$HOME/.claude.json.backup" || true
+  '';
+  
+  home.activation.restoreClaudeConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    [ -f "$HOME/.claude.json.backup" ] && [ ! -f "$HOME/.claude.json" ] && cp -p "$HOME/.claude.json.backup" "$HOME/.claude.json" || true
+  '';
 }
