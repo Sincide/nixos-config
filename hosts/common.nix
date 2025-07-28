@@ -11,6 +11,9 @@
   # Use systemd-boot on all UEFI machines
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  
+  # Use latest stable kernel for newest hardware support
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Set Swedish keyboard layout for graphical sessions and the console
   services.xserver.xkb.layout = "se";
