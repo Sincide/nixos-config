@@ -12,7 +12,7 @@ binds {
     // Rofi launchers and wallpaper selector
     "d" spawn "rofi" "-show" "drun"
     "r" spawn "rofi" "-show" "run" 
-    "w" spawn "rofi" "-show" "wallpaper"
+    "w" spawn "sh" "-c" "~/.local/bin/wallpaper-selector \"$(~/.local/bin/wallpaper-selector | rofi -dmenu -p 'Select Wallpaper')\""
     "Tab" spawn "rofi" "-show" "window"
 
     // Super + Q to close the focused window.
