@@ -46,7 +46,7 @@
   xdg.configFile = {
     "dunst".source = ./dotfiles/dunst;
     "fuzzel".source = ./dotfiles/fuzzel; # Fuzzel uses its default config if this is empty
-    "hypr".source = ./dotfiles/hypr;
+    "hypr".source = ./dotfiles/hypr; # Modular Hyprland config with your monitor setup
     "kitty".source = ./dotfiles/kitty;
     "niri".source = ./dotfiles/niri; # Empty for now, ready for you to configure
     "swappy".source = ./dotfiles/swappy; # Empty for now
