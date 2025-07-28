@@ -5,11 +5,13 @@ This repository contains a complete NixOS configuration with Hyprland desktop en
 ## What You'll Get
 
 - **Desktop Environment**: Hyprland (modern Wayland compositor) with Waybar status bar
-- **Terminal**: Kitty terminal emulator
-- **Launcher**: Fuzzel application launcher
+- **Terminal**: Kitty terminal emulator with dynamic theming
+- **Launcher**: Rofi application launcher with wallpaper selector mode
+- **Wallpaper Management**: SWWW daemon with smooth transitions
+- **Dynamic Theming**: Matugen for Material You color generation from wallpapers
 - **Shell**: Fish shell with useful aliases
 - **Development Tools**: Claude Code (AI coding assistant) with daily updates
-- **Notifications**: Dunst notification daemon
+- **Notifications**: Dunst notification daemon with theme integration
 - **Screenshots**: Swappy screenshot tool with Grim
 - **Fonts**: Fira Code Nerd Font for terminal/coding
 - **Swedish Keyboard Layout**: Configured for Swedish users
@@ -131,11 +133,32 @@ If you made changes during VM testing:
 The Hyprland configuration includes these default keybindings:
 
 - `Super + Return`: Open terminal (Kitty)
-- `Super + D`: Open application launcher (Fuzzel)
+- `Super + D`: Open application launcher (Rofi)
+- `Super + R`: Run command launcher (Rofi)
+- `Super + W`: Wallpaper selector (Rofi)
+- `Super + Tab`: Window switcher (Rofi)
 - `Super + Q`: Close active window
 - `Super + Numbers (1-9)`: Switch workspaces
 - `Super + Shift + Numbers`: Move window to workspace
 - `Super + Mouse`: Move/resize windows
+
+### Dynamic Theming Setup
+
+1. **Create wallpaper directory**: 
+   ```bash
+   mkdir -p ~/Pictures/Wallpapers
+   ```
+
+2. **Add wallpaper images** to `~/Pictures/Wallpapers/` (supports JPG, PNG, WebP, GIF)
+
+3. **Select wallpaper and generate theme**:
+   - Press `Super + W` to open wallpaper selector
+   - Choose a wallpaper to automatically:
+     - Set it as background with smooth transition
+     - Generate Material You colors from the image
+     - Apply theme to all applications (Kitty, Waybar, Dunst, Rofi, Hyprland)
+
+The system will automatically reload all themed applications when you change wallpapers.
 
 ### Making Changes
 

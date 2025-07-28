@@ -9,6 +9,12 @@ binds {
     // Super + Return to open a terminal.
     "Return" spawn "kitty"
 
+    // Rofi launchers and wallpaper selector
+    "d" spawn "rofi" "-show" "drun"
+    "r" spawn "rofi" "-show" "run" 
+    "w" spawn "rofi" "-show" "wallpaper"
+    "Tab" spawn "rofi" "-show" "window"
+
     // Super + Q to close the focused window.
     "q" close-window
 

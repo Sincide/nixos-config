@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+# Wallpaper selector script for rofi integration
+# This script displays wallpapers and sets them using swww + matugen
+
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+CACHE_DIR="$HOME/.cache/wallpaper-thumbnails"
+
+# Create directories if they don't exist
+mkdir -p "$WALLPAPER_DIR" "$CACHE_DIR"
+
+# Function to generate thumbnail
+generate_thumbnail() {
+    local image="$1"
+    local thumbnail="$CACHE_DIR/$(basename "$image").thumb.jpg"
+    
+    if [[ ! -f "$thumbnail" ]] || [[ "$image" -nt "$thumbnail" ]]; then
+        convert "$image" -resize 200x200^ -gravity center -extent 200x200 "$thumbnail" 2>/dev/null
+    fi
+    echo "$thumbnail"
+}
+
+# Function to set wallpaper
+set_wallpaper() {
+    local wallpaper="$1"
+    
+    # Set wallpaper with swww
+    swww img "$wallpaper" --transition-type wipe --transition-duration 1
+    
+    # Generate theme with matugen
+    matugen image "$wallpaper" --mode dark --json hex
+    
+    # Reload applications
+    pkill -SIGUSR2 waybar 2>/dev/null || true
+    pkill -SIGUSR1 kitty 2>/dev/null || true  
+    pkill -SIGUSR2 dunst 2>/dev/null || true
+    hyprctl reload 2>/dev/null || true
+    
+    notify-send "Wallpaper Changed" "$(basename "$wallpaper")" -i "$wallpaper"
+}
+
+# Main rofi mode logic
+case "$ROFI_RETV" in
+    0)
+        # Initial call - show wallpapers
+        if [[ ! -d "$WALLPAPER_DIR" ]] || [[ -z "$(ls -A "$WALLPAPER_DIR" 2>/dev/null)" ]]; then
+            echo "No wallpapers found in $WALLPAPER_DIR"
+            echo "Please add some images to this directory"
+            exit 0
+        fi
+        
+        # List wallpapers with thumbnails
+        for image in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,webp,gif} 2>/dev/null; do
+            [[ -f "$image" ]] || continue
+            thumbnail=$(generate_thumbnail "$image")
+            echo -en "$(basename "$image")\x00icon\x1f$thumbnail\n"
+        done
+        ;;
+    1)
+        # Selection made - set wallpaper
+        selected_name="$1"
+        wallpaper_path="$WALLPAPER_DIR/$selected_name"
+        
+        if [[ -f "$wallpaper_path" ]]; then
+            set_wallpaper "$wallpaper_path"
+            exit 0
+        else
+            echo "Error: Wallpaper not found: $wallpaper_path"
+            exit 1
+        fi
+        ;;
+esac

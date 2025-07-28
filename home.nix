@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 
 {
   home.stateVersion = "25.05";
@@ -24,8 +24,11 @@
     # Terminal
     kitty
 
-    # App Launcher
-    fuzzel
+    # App Launcher and Wallpaper Selector
+    rofi-wayland
+    
+    # Wallpaper daemon
+    swww
 
     # Notifications
     dunst
@@ -36,8 +39,14 @@
 
     # Fonts for icons and style
     nerd-fonts.fira-code
+    
+    # Image manipulation for wallpaper thumbnails
+    imagemagick
   ];
 
+
+  # Import matugen module
+  imports = [ inputs.matugen.nixosModules.default ];
 
   # 2. LINK OUR NEW DOTFILES
   # ==========================
@@ -45,7 +54,7 @@
   # we just created into the correct ~/.config/ location.
   xdg.configFile = {
     "dunst".source = ./dotfiles/dunst;
-    "fuzzel".source = ./dotfiles/fuzzel; # Fuzzel uses its default config if this is empty
+    "rofi".source = ./dotfiles/rofi;
     "hypr".source = ./dotfiles/hypr; # Modular Hyprland config with your monitor setup
     "kitty".source = ./dotfiles/kitty;
     "niri".source = ./dotfiles/niri; # Empty for now, ready for you to configure
@@ -86,6 +95,12 @@
 
   home.sessionPath = [ "$HOME/.local/bin" ];
   
+  # Install wallpaper selector script
+  home.file.".local/bin/wallpaper-selector" = {
+    source = ./wallpaper-selector;
+    executable = true;
+  };
+  
   home.activation.preserveClaudeConfig = lib.hm.dag.entryBefore ["writeBoundary"] ''
     [ -f "$HOME/.claude.json" ] && cp -p "$HOME/.claude.json" "$HOME/.claude.json.backup" || true
   '';
@@ -93,4 +108,16 @@
   home.activation.restoreClaudeConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
     [ -f "$HOME/.claude.json.backup" ] && [ ! -f "$HOME/.claude.json" ] && cp -p "$HOME/.claude.json.backup" "$HOME/.claude.json" || true
   '';
+
+  # Matugen configuration for dynamic theming
+  programs.matugen = {
+    enable = true;
+    variant = "dark";
+    jsonFormat = "hex";
+    # Using built-in templates - matugen provides defaults for most applications
+    templates = {
+      # Built-in templates will be used automatically for supported applications
+      # kitty, waybar, hyprland, rofi, dunst are all supported by default
+    };
+  };
 }
