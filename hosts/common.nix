@@ -5,6 +5,9 @@
 
 {
 
+# This permanently enables flakes and the new nix command syntax
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Use systemd-boot on all UEFI machines
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -35,5 +38,10 @@
     vim
     wget
     git
+    firefox
+    hyprpolkitagent # If this fails, use polkit_gnome instead
   ];
+
+  # Enable polkit for authentication dialogs (required for many desktop actions)
+  security.polkit.enable = true;
 }
