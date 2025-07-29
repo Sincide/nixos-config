@@ -236,7 +236,9 @@ nixos-config/
 ## Customization
 
 See [docs/customization.md](docs/customization.md) for tips on tweaking the configuration, adding packages and adjusting desktop settings.
+
 See [docs/changes.md](docs/changes.md) for a summary of the latest improvements.
+
 
 ## Advanced: Multiple Machines
 
