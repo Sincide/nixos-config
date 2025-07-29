@@ -1,0 +1,235 @@
+@import url("colors.css");
+
+/* ═══════════════════════════════════════════════════════════ */
+/*         EVIL SPACE LEFT SYSTEM BAR WITH MATUGEN COLORS     */
+/* ═══════════════════════════════════════════════════════════ */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+    font-size: 9px;
+    font-weight: 400;
+    min-height: 0;
+}
+
+/* Main left window - much narrower and proper vertical layout */
+window#waybar {
+    background: @surface;
+    border: 1px solid @outline;
+    border-radius: 0;
+    box-shadow: 2px 0 8px @shadow;
+    color: @onSurface;
+    transition: all 200ms ease;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* Force vertical layout for left bar */
+.modules-left {
+    margin: 4px 0px;
+}
+
+.modules-center {
+    margin: 4px 0px;
+}
+
+.modules-right {
+    margin: 4px 0px;
+}
+
+/* All modules - larger and more readable */
+#custom-system-title,
+#custom-cpu-usage,
+#custom-memory-detailed,
+#custom-disk-root,
+#custom-network-down,
+#custom-top-process,
+#custom-thermal-zones,
+#custom-uptime-detailed {
+    background: @surface;
+    border: 1px solid @outline;
+    border-radius: 0;
+    padding: 6px 8px;
+    margin: 3px 4px;
+    color: @onSurface;
+    box-shadow: 0 2px 4px @shadow;
+    transition: all 150ms ease;
+    font-size: 10px;
+    min-width: 0;
+}
+
+/* Hover effects */
+#custom-system-title:hover,
+#custom-cpu-usage:hover,
+#custom-memory-detailed:hover,
+#custom-disk-root:hover,
+#custom-network-down:hover,
+#custom-top-process:hover,
+#custom-thermal-zones:hover,
+#custom-uptime-detailed:hover {
+    background: @surfaceVariant;
+    border: 1px solid @primary;
+    color: @onSurfaceVariant;
+    box-shadow: 0 3px 6px @shadow;
+}
+
+/* HEADER */
+#custom-system-title {
+    background: @primaryContainer;
+    color: @onPrimaryContainer;
+    border: 1px solid @primary;
+    font-weight: 700;
+    font-size: 10px;
+    padding: 4px 2px;
+    margin: 2px 0px;
+}
+
+/* SEPARATORS - minimal and compact */
+#custom-separator1,
+#custom-separator2,
+#custom-separator3,
+#custom-separator4,
+#custom-separator5,
+#custom-separator6 {
+    background: transparent;
+    color: @outline;
+    border: none;
+    font-size: 6px;
+    padding: 1px 2px;
+    margin: 1px 0px;
+    box-shadow: none;
+}
+
+/* CPU SECTION */
+#custom-cpu-usage {
+    background: @errorContainer;
+    color: @onErrorContainer;
+    border: 1px solid @error;
+}
+
+#custom-cpu-freq {
+    background: @primaryContainer;
+    color: @onPrimaryContainer;
+    border: 1px solid @primary;
+}
+
+#custom-memory-detailed {
+    background: @secondaryContainer;
+    color: @onSecondaryContainer;
+    border: 1px solid @secondary;
+}
+
+/* DISK SECTION */
+#custom-disk-root {
+    background: @tertiaryContainer;
+    color: @onTertiaryContainer;
+    border: 1px solid @tertiary;
+}
+
+#custom-disk-home {
+    background: @surfaceVariant;
+    color: @onSurfaceVariant;
+    border: 1px solid @outline;
+}
+
+#custom-disk-io {
+    background: @primaryContainer;
+    color: @onPrimaryContainer;
+    border: 1px solid @primary;
+}
+
+/* NETWORK SECTION */
+#custom-network-up {
+    background: @errorContainer;
+    color: @onErrorContainer;
+    border: 1px solid @error;
+}
+
+#custom-network-down {
+    background: @secondaryContainer;
+    color: @onSecondaryContainer;
+    border: 1px solid @secondary;
+}
+
+#custom-network-ping {
+    background: @tertiaryContainer;
+    color: @onTertiaryContainer;
+    border: 1px solid @tertiary;
+}
+
+/* PROCESS SECTION */
+#custom-top-process {
+    background: @errorContainer;
+    color: @onErrorContainer;
+    border: 1px solid @error;
+    font-size: 7px;
+}
+
+#custom-process-count {
+    background: @surfaceVariant;
+    color: @onSurfaceVariant;
+    border: 1px solid @outline;
+    font-size: 7px;
+}
+
+#custom-zombie-check {
+    background: @surface;
+    color: @onSurface;
+    border: 1px solid @outline;
+}
+
+/* THERMAL & POWER */
+#custom-thermal-zones {
+    background: @errorContainer;
+    color: @onErrorContainer;
+    border: 1px solid @error;
+}
+
+#custom-power-draw {
+    background: @primaryContainer;
+    color: @onPrimaryContainer;
+    border: 1px solid @primary;
+}
+
+#custom-battery-health {
+    background: @tertiaryContainer;
+    color: @onTertiaryContainer;
+    border: 1px solid @tertiary;
+}
+
+/* SYSTEM SUMMARY */
+#custom-uptime-detailed {
+    background: @surfaceVariant;
+    color: @onSurfaceVariant;
+    border: 1px solid @outline;
+}
+
+#custom-system-stats {
+    background: @primaryContainer;
+    color: @onPrimaryContainer;
+    border: 1px solid @primary;
+    font-size: 9px;
+    padding: 3px 2px;
+}
+
+/* Critical state animation */
+@keyframes critical-pulse {
+    0% { 
+        box-shadow: 0 1px 2px @shadow;
+    }
+    100% { 
+        box-shadow: 0 2px 8px @error;
+    }
+}
+
+/* Tooltip styling */
+tooltip {
+    border-radius: 0;
+    background: @surface;
+    border: 1px solid @outline;
+    color: @onSurface;
+    font-size: 9px;
+}

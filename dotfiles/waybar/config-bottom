@@ -1,0 +1,205 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 32,
+    "margin-bottom": 8,
+    "margin-left": 8,
+    "margin-right": 8,
+    "spacing": 4,
+    
+    "modules-left": [
+        "custom/claude",
+        "custom/updates"
+    ],
+    
+    "modules-center": [
+        "custom/amdgpu-temp",
+        "custom/amdgpu-fan", 
+        "custom/amdgpu-usage",
+        "custom/amdgpu-vram",
+        "custom/amdgpu-power"
+    ],
+    
+    "modules-right": [
+        "custom/quick-reference",
+        "custom/qbittorrent",
+        "custom/cpu-usage",
+        "custom/cpu-freq",
+        "temperature",
+        "custom/load",
+        "custom/memory",
+        "custom/disk-io",
+        "custom/top-process",
+        "custom/uptime",
+        "custom/system-info"
+    ],
+
+    // ╭─────────────────────────────────────────────────────────╮
+    // │                 LEFT MODULES (AI & UPDATES)             │
+    // ╰─────────────────────────────────────────────────────────╯
+
+    "custom/claude": {
+        "format": "{}",
+        "interval": 5,
+        "exec": "~/nixos-config/scripts/waybar/claude-status.fish",
+        "tooltip": true,
+        "tooltip-format": "🤖 Claude Code Monitor\n⚡ Real-time token usage tracking\n💀 Dynamic burn rate analysis\n🌌 Evil Space AI Power\n\n🖱️ Left Click: Open full monitor\n🖱️ Right Click: Refresh status",
+        "on-click": "kitty -e python3 ~/nixos-config/scripts/ai/claude_monitor.py",
+        "on-click-right": "pkill -RTMIN+8 waybar"
+    },
+
+    "custom/updates": {
+        "format": "📦 {}",
+        "interval": 3600,
+        "exec": "checkupdates 2>/dev/null | wc -l || echo '0'",
+        "exec-if": "exit 0",
+        "tooltip": true,
+        "tooltip-format": "📦 System Updates\n⚡ {} packages available\n💀 Keep the void updated",
+        "on-click": "kitty -e sudo pacman -Syu"
+    },
+
+    // ╭─────────────────────────────────────────────────────────╮
+    // │              CENTER AMDGPU MONITORING                   │
+    // ╰─────────────────────────────────────────────────────────╯
+
+    "custom/amdgpu-temp": {
+        "format": "{}°C",
+        "interval": 2,
+        "exec": "~/nixos-config/scripts/theming/gpu_temp_monitor.sh",
+        "tooltip": true,
+        "tooltip-format": "🔥 AMDGPU Temperature\n🌡️ Dynamic thermal monitoring\n💀 Evil GPU Power"
+    },
+
+    "custom/amdgpu-fan": {
+        "format": "{}%",
+        "interval": 2,
+        "exec": "~/nixos-config/scripts/theming/gpu_fan_monitor.sh",
+        "tooltip": true,
+        "tooltip-format": "💨 AMDGPU Fan Control\n🌪️ Dynamic cooling status\n⚡ Adaptive Speed"
+    },
+
+    "custom/amdgpu-usage": {
+        "format": "{}%",
+        "interval": 2,
+        "exec": "~/nixos-config/scripts/theming/gpu_usage_monitor.sh",
+        "tooltip": true,
+        "tooltip-format": "🎮 AMDGPU Usage\n⚡ Dynamic utilization\n💥 Gaming Power"
+    },
+
+    "custom/amdgpu-vram": {
+        "format": "{}",
+        "interval": 2,
+        "exec": "~/nixos-config/scripts/theming/gpu_vram_monitor.sh",
+        "tooltip": true,
+        "tooltip-format": "🧠 AMDGPU VRAM\n💾 Dynamic memory usage\n🌌 Graphics Memory"
+    },
+
+    "custom/amdgpu-power": {
+        "format": "{}W",
+        "interval": 2,
+        "exec": "~/nixos-config/scripts/theming/gpu_power_monitor.sh",
+        "tooltip": true,
+        "tooltip-format": "⚡ AMDGPU Power Draw\n🔥 Dynamic consumption\n💀 Energy Monitor"
+    },
+
+    // ╭─────────────────────────────────────────────────────────╮
+    // │                 RIGHT SYSTEM INFO                       │
+    // ╰─────────────────────────────────────────────────────────╯
+
+    "custom/quick-reference": {
+        "format": "📋",
+        "tooltip": true,
+        "tooltip-format": "🗒️ Quick Reference Guide\n\n🔥 Key Commands:\n• organize-media     → FileBot auto-rename (your video files!)\n• vaapi-convert      → GPU video encoding\n• log-analyzer live  → AI system monitoring\n• dashboard          → Web monitoring interface\n• appwall            → Wallpaper + auto-theming\n• claude-commit      → AI commit messages\n\n🖱️ Left Click: Full reference popup\n🖱️ Right Click: Quick command list",
+        "on-click": "kitty --class=quick-reference --title='Evil Space Quick Reference' --override font_size=11 --override background_opacity=0.95 --override window_padding_width=20 -e ~/nixos-config/scripts/waybar/quick-reference.fish",
+        "on-click-right": "notify-send '📋 Quick Commands' 'organize-media → FileBot auto-rename\nvaapi-convert → GPU encoding\nlog-analyzer live → AI monitoring\ndashboard → Web interface\nappwall → Wallpaper theming\nSuper+W → Wallpaper selector\nSuper+D → App launcher' -t 5000"
+    },
+
+    "temperature": {
+        "thermal-zone": 0,
+        "format": "🌡️ {temperatureC}°C",
+        "interval": 2,
+        "critical-threshold": 80,
+        "tooltip": true,
+        "tooltip-format": "🔥 CPU Temperature\n🌡️ Current: {temperatureC}°C\n💀 Thermal monitoring"
+    },
+
+    "custom/load": {
+        "format": "⚖️ Load: {}",
+        "interval": 5,
+        "exec": "uptime | awk -F'load average:' '{print $2}' | awk '{print $1}' | tr -d ','",
+        "tooltip": true,
+        "tooltip-format": "⚖️ System Load\n📊 1min: {}\n💀 Processing pressure"
+    },
+
+    "custom/memory": {
+        "format": "{}",
+        "interval": 5,
+        "exec": "~/nixos-config/scripts/theming/memory_monitor.sh",
+        "tooltip": true,
+        "tooltip-format": "🧠 Memory Usage\n💾 Dynamic RAM monitoring\n💀 Evil System Memory\n\n🟢 <60% - Good\n🧠 60-79% - Medium\n🔥 80-89% - Warning\n💀 90%+ - Critical"
+    },
+
+    "custom/uptime": {
+        "format": "⏰ {}",
+        "interval": 60,
+        "exec": "uptime -p | sed 's/up //' | sed 's/ hours/h/' | sed 's/ hour/h/' | sed 's/ minutes/m/' | sed 's/ minute/m/' | sed 's/ days/d/' | sed 's/ day/d/'",
+        "tooltip": true,
+        "tooltip-format": "⏰ System Uptime\n🌌 Running: {}\n💀 Void persistence"
+    },
+
+    "custom/cpu-usage": {
+        "format": "{}",
+        "interval": 3,
+        "exec": "~/nixos-config/scripts/theming/cpu_usage_monitor.sh",
+        "tooltip": true,
+        "tooltip-format": "🧠 CPU Usage\n⚡ Real-time utilization\n💀 Processing power"
+    },
+
+    "custom/cpu-freq": {
+        "format": "{}",
+        "interval": 5,
+        "exec": "~/nixos-config/scripts/theming/cpu_freq_monitor.sh",
+        "tooltip": true,
+        "tooltip-format": "⚡ CPU Frequency\n🔥 Dynamic scaling\n💨 Turbo boost status"
+    },
+
+    "custom/disk-io": {
+        "format": "{}",
+        "interval": 3,
+        "exec": "~/nixos-config/scripts/theming/disk_io_monitor.sh",
+        "tooltip": true,
+        "tooltip-format": "💿 Disk I/O Activity\n📈 Read/Write operations\n🌪️ Storage throughput"
+    },
+
+
+    "custom/top-process": {
+        "format": "{}",
+        "interval": 5,
+        "exec": "~/nixos-config/scripts/theming/top_process_monitor.sh",
+        "tooltip": true,
+        "tooltip-format": "🔥 Highest CPU Process\n💀 Shows CPU cores used (1.3c = 1.3 cores)\n⚡ Evil process tracking"
+    },
+
+    "custom/system-info": {
+        "format": "🖥️ SYS",
+        "interval": 3600,
+        "exec": "echo 'INFO'",
+        "tooltip": true,
+        "tooltip-format": "🖥️ System Information\n💀 NixOS + Hyprland\n🌌 Evil Space Theme\n⚡ Material You Theming\n🎨 Dynamic Wallpaper Colors",
+        "on-click": "kitty -e neofetch"
+    },
+
+    // ╭─────────────────────────────────────────────────────────╮
+    // │                 QBITTORRENT MODULE                      │
+    // ╰─────────────────────────────────────────────────────────╯
+
+    "custom/qbittorrent": {
+        "format": "🌪️ {}",
+        "interval": 3,
+        "exec": "~/nixos-config/scripts/waybar/qbittorrent-status.fish",
+        "tooltip": true,
+        "tooltip-format": "🌪️ qBittorrent Status\n💀 Evil Torrent Control\n\n⬇️ Downloads: Active torrents\n🌱 Seeding: Upload activity\n⏸️ Paused: Inactive torrents\n💀 IDLE: No active transfers\n\n🖱️ Left Click: Open Web UI\n🖱️ Right Click: Service Control",
+        "on-click": "xdg-open http://127.0.0.1:9090",
+        "on-click-right": "kitty -e fish -c 'echo \"🌪️ qBittorrent Service Control\"; echo; systemctl --user status qbittorrent-nox.service; echo; echo \"Commands:\"; echo \"  Start:   systemctl --user start qbittorrent-nox\"; echo \"  Stop:    systemctl --user stop qbittorrent-nox\"; echo \"  Restart: systemctl --user restart qbittorrent-nox\"; echo \"  Logs:    journalctl --user -u qbittorrent-nox -f\"; echo; read -P \"Press Enter to continue...\"'"
+    }
+} 

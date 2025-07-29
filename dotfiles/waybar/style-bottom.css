@@ -1,0 +1,304 @@
+@import url("colors.css");
+
+/* ═══════════════════════════════════════════════════════════ */
+/*         EVIL SPACE BOTTOM BAR WITH MATUGEN COLORS          */
+/* ═══════════════════════════════════════════════════════════ */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+    font-size: 11px;
+    font-weight: 400;
+    min-height: 0;
+}
+
+/* Main bottom window */
+window#waybar {
+    background: @surface;
+    border: 1px solid @outline;
+    border-radius: 0;
+    box-shadow: 0 -2px 8px @shadow;
+    color: @onSurface;
+    transition: all 200ms ease;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* All modules base styling */
+#custom-amdgpu-temp,
+#custom-amdgpu-fan,
+#custom-amdgpu-usage,
+#custom-amdgpu-vram,
+#custom-amdgpu-power,
+#custom-claude,
+#cpu,
+#memory,
+#disk,
+#custom-updates,
+#custom-quick-reference,
+#custom-qbittorrent,
+#temperature,
+#custom-load,
+#custom-memory,
+#custom-cpu-usage,
+#custom-cpu-freq,
+#custom-disk-io,
+#custom-top-process,
+#custom-uptime,
+#custom-system-info {
+    background: @surface;
+    border: 1px solid @outline;
+    border-radius: 0;
+    padding: 3px 8px;
+    margin: 2px 1px;
+    color: @onSurface;
+    box-shadow: 0 2px 8px @shadow;
+    transition: all 150ms ease;
+}
+
+/* Hover effects */
+#custom-amdgpu-temp:hover,
+#custom-amdgpu-fan:hover,
+#custom-amdgpu-usage:hover,
+#custom-amdgpu-vram:hover,
+#custom-amdgpu-power:hover,
+#custom-claude:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#custom-updates:hover,
+#custom-quick-reference:hover,
+#custom-qbittorrent:hover,
+#temperature:hover,
+#custom-load:hover,
+#custom-memory:hover,
+#custom-cpu-usage:hover,
+#custom-cpu-freq:hover,
+#custom-disk-io:hover,
+#custom-top-process:hover,
+#custom-uptime:hover,
+#custom-system-info:hover {
+    background: @surfaceVariant;
+    border: 1px solid @primary;
+    color: @onSurfaceVariant;
+}
+
+/* AMDGPU modules - Adaptive wallpaper-based colors */
+#custom-amdgpu-temp {
+    background: @surfaceVariant;
+    color: @onSurfaceVariant;
+    border: 1px solid @outline;
+}
+
+#custom-amdgpu-fan {
+    background: @surfaceVariant;
+    color: @onSurfaceVariant;
+    border: 1px solid @outline;
+}
+
+#custom-amdgpu-usage {
+    background: @surfaceVariant;
+    color: @onSurfaceVariant;
+    border: 1px solid @outline;
+}
+
+#custom-amdgpu-vram {
+    background: @surfaceVariant;
+    color: @onSurfaceVariant;
+    border: 1px solid @outline;
+}
+
+#custom-amdgpu-power {
+    background: @surfaceVariant;
+    color: @onSurfaceVariant;
+    border: 1px solid @outline;
+    font-weight: 500;
+}
+
+/* Claude AI monitoring - Evil Space AI theme */
+#custom-claude {
+    background: @primaryContainer;
+    color: @onPrimaryContainer;
+    border: 1px solid @primary;
+    font-weight: 600;
+    font-size: 12px;
+    box-shadow: 0 2px 8px @shadow;
+}
+
+#custom-claude:hover {
+    background: @primary;
+    color: @onPrimary;
+    border: 1px solid @primary;
+    box-shadow: 0 4px 16px @shadow;
+}
+
+/* CPU monitoring - primary theme */
+#cpu {
+    background: @primaryContainer;
+    color: @onPrimaryContainer;
+    border: 1px solid @primary;
+    font-weight: 500;
+}
+
+/* Memory - secondary theme */
+#memory {
+    background: @secondaryContainer;
+    color: @onSecondaryContainer;
+    border: 1px solid @secondary;
+}
+
+/* Disk - tertiary theme */
+#disk {
+    background: @tertiaryContainer;
+    color: @onTertiaryContainer;
+    border: 1px solid @tertiary;
+}
+
+/* Updates - special highlighting when updates available */
+#custom-updates {
+    background: @surfaceVariant;
+    color: @onSurfaceVariant;
+    border: 1px solid @outline;
+}
+
+/* Quick Reference - special accent for easy access */
+#custom-quick-reference {
+    background: @tertiaryContainer;
+    color: @onTertiaryContainer;
+    border: 1px solid @tertiary;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+#custom-quick-reference:hover {
+    background: @tertiary;
+    color: @onTertiary;
+    border: 1px solid @tertiary;
+    box-shadow: 0 4px 12px @shadow;
+}
+
+/* qBittorrent - secondary theme for torrent activity */
+#custom-qbittorrent {
+    background: @secondaryContainer;
+    color: @onSecondaryContainer;
+    border: 1px solid @secondary;
+    font-weight: 500;
+}
+
+#custom-qbittorrent:hover {
+    background: @secondary;
+    color: @onSecondary;
+    box-shadow: 0 4px 12px @shadow;
+}
+
+/* Temperature monitoring - error theme for heat */
+#temperature {
+    background: @errorContainer;
+    color: @onErrorContainer;
+    border: 1px solid @error;
+}
+
+#temperature.critical {
+    background: @error;
+    color: @onError;
+    animation: temperature-critical 1s ease-in-out infinite alternate;
+}
+
+/* Load monitoring - primary theme */
+#custom-load {
+    background: @primaryContainer;
+    color: @onPrimaryContainer;
+    border: 1px solid @primary;
+}
+
+/* Memory monitoring - secondary theme */
+#custom-memory {
+    background: @secondaryContainer;
+    color: @onSecondaryContainer;
+    border: 1px solid @secondary;
+    font-weight: 500;
+}
+
+/* CPU Usage - primary theme (not error unless critical) */
+#custom-cpu-usage {
+    background: @primaryContainer;
+    color: @onPrimaryContainer;
+    border: 1px solid @primary;
+    font-weight: 500;
+}
+
+/* CPU Usage critical state - would need script modification to add css class */
+#custom-cpu-usage.critical {
+    background: @errorContainer;
+    color: @onErrorContainer;
+    border: 1px solid @error;
+}
+
+/* CPU Frequency - primary theme */
+#custom-cpu-freq {
+    background: @primaryContainer;
+    color: @onPrimaryContainer;
+    border: 1px solid @primary;
+}
+
+/* Disk I/O - tertiary theme */
+#custom-disk-io {
+    background: @tertiaryContainer;
+    color: @onTertiaryContainer;
+    border: 1px solid @tertiary;
+    font-size: 10px;
+    min-width: 140px;
+}
+
+
+/* Top Process - primary theme with emphasis */
+#custom-top-process {
+    background: @primaryContainer;
+    color: @onPrimaryContainer;
+    border: 1px solid @primary;
+    font-weight: 600;
+    font-size: 10px;
+    min-width: 120px;
+}
+
+/* Uptime - tertiary theme */
+#custom-uptime {
+    background: @tertiaryContainer;
+    color: @onTertiaryContainer;
+    border: 1px solid @tertiary;
+}
+
+/* System info - special accent */
+#custom-system-info {
+    background: @surfaceVariant;
+    color: @onSurfaceVariant;
+    border: 1px solid @outline;
+    font-weight: 500;
+}
+
+#custom-system-info:hover {
+    background: @surface;
+    color: @onSurface;
+    border: 1px solid @primary;
+}
+
+/* Critical temperature animation */
+@keyframes temperature-critical {
+    0% { 
+        box-shadow: 0 2px 8px @shadow;
+    }
+    100% { 
+        box-shadow: 0 4px 16px @error;
+    }
+}
+
+/* Tooltip styling */
+tooltip {
+    border-radius: 0;
+    background: @surface;
+    border: 1px solid @outline;
+    color: @onSurface;
+} 
