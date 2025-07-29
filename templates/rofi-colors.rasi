@@ -1,16 +1,16 @@
 /* Matugen generated colors for Rofi */
 * {
-    background: @{colors.surface};
-    background-alt: @{colors.surface_dim};
-    foreground: @{colors.on_surface};
-    selected: @{colors.primary};
-    selected-fg: @{colors.on_primary};
-    active: @{colors.secondary};
-    urgent: @{colors.error};
+    background: {{ colors.surface.dark.hex }};
+    background-alt: {{ colors.surface_dim.dark.hex }};
+    foreground: {{ colors.on_surface.dark.hex }};
+    selected: {{ colors.primary.dark.hex }};
+    selected-fg: {{ colors.on_primary.dark.hex }};
+    active: {{ colors.secondary.dark.hex }};
+    urgent: {{ colors.error.dark.hex }};
     
-    border-colour: @{colors.outline};
-    handle-colour: @{colors.primary};
-    separatorcolor: @{colors.outline_variant};
+    border-colour: {{ colors.outline.dark.hex }};
+    handle-colour: {{ colors.primary.dark.hex }};
+    separatorcolor: {{ colors.outline_variant.dark.hex }};
     
     font: "FiraCode Nerd Font 12";
 }
