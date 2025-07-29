@@ -1,17 +1,17 @@
 # hosts/common.nix
 # Settings that will be applied to ALL machines
 
-{ config, pkgs, ... }:
+{ config, pkgs, username, ... }:
 
 {
 
-# This permanently enables flakes and the new nix command syntax
+  # This permanently enables flakes and the new nix command syntax
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Use systemd-boot on all UEFI machines
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  
+
   # Use latest stable kernel for newest hardware support
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -22,13 +22,13 @@
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
 
-    # Enable the fish shell program module
+  # Enable the fish shell program module
   programs.fish.enable = true;
 
   # Define your user account here so it exists on all machines
-  users.users.martin = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "Martin";
+    description = username;
     extraGroups = [ "networkmanager" "wheel" ]; # 'wheel' allows sudo
     shell = pkgs.fish;
   };
@@ -47,4 +47,13 @@
 
   # Enable polkit for authentication dialogs (required for many desktop actions)
   security.polkit.enable = true;
+
+  # Use Cachix binary cache for faster installs
+  nix.settings.substituters = [
+    "https://cache.nixos.org/"
+    "https://claude-code.cachix.org"
+  ];
+  nix.settings.trusted-public-keys = [
+    "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
+  ];
 }
