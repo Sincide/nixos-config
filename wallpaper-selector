@@ -35,11 +35,32 @@ swww img "$wallpaper_path" --transition-type wipe --transition-duration 1
 echo "🎨 Generating theme colors..."
 matugen image "$wallpaper_path" --variant dark --json-format hex
 
-# Ensure waybar colors are generated
+# Generate colors for all components manually to ensure they're created
+echo "  • Generating component colors..."
+
+# Waybar colors
 if [[ -f "templates/waybar.css" ]]; then
-    echo "  • Generating waybar colors..."
-    # Generate waybar colors manually if matugen config doesn't handle it
     matugen image "$wallpaper_path" --variant dark --json-format hex -t templates/waybar.css > dotfiles/waybar/colors.css
+fi
+
+# Kitty colors
+if [[ -f "templates/kitty.conf" ]]; then
+    matugen image "$wallpaper_path" --variant dark --json-format hex -t templates/kitty.conf > dotfiles/kitty/colors.conf
+fi
+
+# Dunst colors
+if [[ -f "templates/dunst.conf" ]]; then
+    matugen image "$wallpaper_path" --variant dark --json-format hex -t templates/dunst.conf > dotfiles/dunst/colors.conf
+fi
+
+# Hyprland colors
+if [[ -f "templates/hyprland.conf" ]]; then
+    matugen image "$wallpaper_path" --variant dark --json-format hex -t templates/hyprland.conf > dotfiles/hypr/colors.conf
+fi
+
+# Rofi colors
+if [[ -f "templates/rofi.rasi" ]]; then
+    matugen image "$wallpaper_path" --variant dark --json-format hex -t templates/rofi.rasi > dotfiles/rofi/colors.rasi
 fi
 
 # Reload applications to pick up new colors
