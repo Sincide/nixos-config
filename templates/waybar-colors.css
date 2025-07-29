@@ -1,19 +1,19 @@
 /* Matugen generated colors for Waybar */
 window#waybar {
-    background-color: @{colors.surface};
-    color: @{colors.on_surface};
+    background-color: {{ colors.surface.dark.hex }};
+    color: {{ colors.on_surface.dark.hex }};
 }
 
 #workspaces button {
     background-color: transparent;
-    color: @{colors.on_surface};
+    color: {{ colors.on_surface.dark.hex }};
 }
 
 #workspaces button.active {
-    background-color: @{colors.primary};
-    color: @{colors.on_primary};
+    background-color: {{ colors.primary.dark.hex }};
+    color: {{ colors.on_primary.dark.hex }};
 }
 
 #clock, #pulseaudio, #network, #tray {
-    color: @{colors.on_surface};
+    color: {{ colors.on_surface.dark.hex }};
 }

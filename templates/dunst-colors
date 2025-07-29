@@ -1,15 +1,15 @@
 # Matugen generated colors for Dunst
 [urgency_low]
-    background = "@{colors.surface}"
-    foreground = "@{colors.on_surface}"
-    frame_color = "@{colors.outline}"
+    background = "{{ colors.surface.dark.hex }}"
+    foreground = "{{ colors.on_surface.dark.hex }}"
+    frame_color = "{{ colors.outline.dark.hex }}"
 
 [urgency_normal]
-    background = "@{colors.surface_container}"
-    foreground = "@{colors.on_surface}"
-    frame_color = "@{colors.primary}"
+    background = "{{ colors.surface_container.dark.hex }}"
+    foreground = "{{ colors.on_surface.dark.hex }}"
+    frame_color = "{{ colors.primary.dark.hex }}"
 
 [urgency_critical]
-    background = "@{colors.error_container}"
-    foreground = "@{colors.on_error_container}"
-    frame_color = "@{colors.error}"
+    background = "{{ colors.error_container.dark.hex }}"
+    foreground = "{{ colors.on_error_container.dark.hex }}"
+    frame_color = "{{ colors.error.dark.hex }}"

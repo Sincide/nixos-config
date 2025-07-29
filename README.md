@@ -66,13 +66,13 @@ git commit -m "Add hardware configuration for this machine"
 
 If your username is not "martin", you need to update the configuration:
 
-1. Edit `hosts/common.nix` line 26 to change the username
-2. Edit `flake.nix` line 20 to update the home-manager user
-3. Edit `home.nix` line 69 to update the rebuild alias
+1. Edit `hosts/common.nix` to change the username
+2. Edit `flake.nix` to update the home-manager user
+3. Edit `home.nix` to update the rebuild alias
 
 **Also update your Git configuration in `home.nix`:**
-- Line 56: Change `userName = "Martin"` to your name
-- Line 57: Change `userEmail = "your-email@example.com"` to your email
+- Change `userName = "Martin"` to your name
+- Change `userEmail = "your-email@example.com"` to your email
 
 ### Step 5: Apply the Configuration
 
@@ -218,7 +218,7 @@ nixos-config/
 
 ### Wrong Keyboard Layout
 - The config is set to Swedish layout (`se`)
-- To change: edit `hosts/common.nix` line 16 and line 17
+- To change: edit `hosts/common.nix` and update the layout settings
 - Common layouts: `us`, `uk`, `de`, `fr`
 
 ### Username Issues
