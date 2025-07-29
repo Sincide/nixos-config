@@ -17,6 +17,9 @@ This repository contains a complete NixOS configuration with Hyprland desktop en
 - **Swedish Keyboard Layout**: Configured for Swedish users
 - **Modular Configuration**: Dotfiles are shipped as optional modules for Hyprland, Waybar and more
 - **Declarative Git**: Username and email configured automatically
+- **Auto Host Discovery**: New hosts are picked up automatically from `hosts/`
+- **SWWW Service**: A systemd user service starts the wallpaper daemon on login
+- **Pre-commit Check**: Prevents commits missing `hardware-configuration.nix`
 
 ## Prerequisites
 
@@ -233,6 +236,9 @@ nixos-config/
 ## Customization
 
 See [docs/customization.md](docs/customization.md) for tips on tweaking the configuration, adding packages and adjusting desktop settings.
+
+See [docs/changes.md](docs/changes.md) for a summary of the latest improvements.
+
 
 ## Advanced: Multiple Machines
 
