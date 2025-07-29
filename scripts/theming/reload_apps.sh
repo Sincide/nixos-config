@@ -20,14 +20,22 @@ fi
 
 # Restart Waybar (dual bars: top + bottom)
 if pgrep -x waybar > /dev/null; then
-    echo "  • Restarting Waybar instances..."
-    pkill waybar
-    sleep 0.5
+    echo "  • Killing all Waybar instances..."
+    pkill -9 waybar
+    sleep 1
 fi
+
+# Wait to ensure all waybar processes are fully terminated
+while pgrep -x waybar > /dev/null; do
+    echo "  • Waiting for waybar to terminate..."
+    sleep 0.5
+done
+
 echo "  • Starting top Waybar..."
-waybar > /dev/null 2>&1 &
+waybar -c ~/nixos-config/dotfiles/waybar/config -s ~/nixos-config/dotfiles/waybar/style.css > /dev/null 2>&1 &
+
 echo "  • Starting bottom Waybar (system monitoring)..."
-waybar -c ~/.config/nixos-config/dotfiles/waybar/config-bottom -s ~/.config/nixos-config/dotfiles/waybar/style-bottom.css > /dev/null 2>&1 &
+waybar -c ~/nixos-config/dotfiles/waybar/config-bottom -s ~/nixos-config/dotfiles/waybar/style-bottom.css > /dev/null 2>&1 &
 
 # Restart Dunst
 if pgrep -x dunst > /dev/null; then
