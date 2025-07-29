@@ -35,10 +35,51 @@ swww img "$wallpaper_path" --transition-type wipe --transition-duration 1
 matugen image "$wallpaper_path" --variant dark --json-format hex
 
 # Reload applications to pick up new colors
-pkill -SIGUSR2 waybar 2>/dev/null || true
-pkill -SIGUSR1 kitty 2>/dev/null || true
-pkill -SIGUSR2 dunst 2>/dev/null || true
-hyprctl reload 2>/dev/null || true
+echo "🔄 Reloading applications with new theme..."
+
+# Check for running window manager and reload
+if pgrep -x "Hyprland" > /dev/null; then
+    echo "  • Reloading Hyprland configuration..."
+    hyprctl reload
+elif pgrep -x "niri" > /dev/null; then
+    echo "  • Niri configuration reloaded automatically."
+else
+    echo "  ⚠️  Neither Hyprland nor Niri are running. Skipping WM reload."
+fi
+
+# Restart Waybar (dual bars: top + bottom)
+if pgrep -x waybar > /dev/null; then
+    echo "  • Restarting Waybar instances..."
+    pkill waybar
+    sleep 0.5
+fi
+echo "  • Starting top Waybar..."
+waybar > /dev/null 2>&1 &
+echo "  • Starting bottom Waybar (system monitoring)..."
+waybar -c ~/.config/nixos-config/dotfiles/waybar/config-bottom -s ~/.config/nixos-config/dotfiles/waybar/style-bottom.css > /dev/null 2>&1 &
+
+# Restart Dunst
+if pgrep -x dunst > /dev/null; then
+    echo "  • Restarting Dunst..."
+    pkill dunst
+    sleep 0.5
+fi
+echo "  • Starting Dunst..."
+dunst > /dev/null 2>&1 &
+
+# Reload Kitty configurations
+echo "  • Reloading Kitty configurations..."
+killall -USR1 kitty 2>/dev/null || echo "    (No kitty instances to reload)"
+
+# Refresh GTK applications
+echo "  • Refreshing GTK theme cache..."
+if command -v gsettings >/dev/null 2>&1; then
+    current_theme=$(gsettings get org.gnome.desktop.interface gtk-theme 2>/dev/null || echo "'Adwaita-dark'")
+    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita' 2>/dev/null || true
+    sleep 0.1
+    gsettings set org.gnome.desktop.interface gtk-theme "${current_theme//\'}" 2>/dev/null || true
+    echo "    ✓ GTK theme refreshed"
+fi
 
 # Show notification
 notify-send "Wallpaper Changed" "$selected_wallpaper" -i "$wallpaper_path"

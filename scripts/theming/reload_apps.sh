@@ -26,8 +26,8 @@ if pgrep -x waybar > /dev/null; then
 fi
 echo "  • Starting top Waybar..."
 waybar > /dev/null 2>&1 &
-echo "  • Starting bottom Waybar (AMDGPU monitoring)..."
-waybar -c ~/.config/waybar/config-bottom -s ~/.config/waybar/style-bottom.css > /dev/null 2>&1 &
+echo "  • Starting bottom Waybar (system monitoring)..."
+waybar -c ~/.config/nixos-config/dotfiles/waybar/config-bottom -s ~/.config/nixos-config/dotfiles/waybar/style-bottom.css > /dev/null 2>&1 &
 
 # Restart Dunst
 if pgrep -x dunst > /dev/null; then
@@ -56,7 +56,7 @@ if command -v gsettings >/dev/null 2>&1; then
     current_theme=$(gsettings get org.gnome.desktop.interface gtk-theme 2>/dev/null || echo "'Adwaita-dark'")
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita' 2>/dev/null || true
     sleep 0.1
-    gsettings set org.gnome.desktop.interface gtk-theme "${current_theme//\'/'}" 2>/dev/null || true
+    gsettings set org.gnome.desktop.interface gtk-theme "${current_theme//\'}" 2>/dev/null || true
     echo "    ✓ GTK theme refreshed"
 fi
 
@@ -76,13 +76,12 @@ echo "    ℹ️  Browsers (Brave, Firefox) may need manual restart for cursor c
 
 echo ""
 echo "✨ Theme applied successfully!"
-echo "   🎨 Wallpaper: $(basename "$(cat $HOME/.cache/wallpaper/current_wallpaper)")"
 echo "   🌈 Material You colors generated for:"
 echo "      • Hyprland or Niri window manager"
-echo "      • Waybar dual bars (top + bottom AMDGPU)"
+echo "      • Waybar dual bars (top + bottom with monitoring)"
 echo "      • Kitty terminal"
 echo "      • Dunst notifications"
- echo "      • Fuzzel launcher"
+echo "      • Fuzzel launcher"
 echo "      • GTK3/GTK4 applications"
 echo ""
 echo "   💡 Some GTK applications may need to be restarted to see the new theme"
