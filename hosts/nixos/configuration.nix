@@ -1,11 +1,11 @@
 { config, pkgs, inputs, ... }:
 
 {
-  # IMPORTANT: The installer will generate this file.
-  # You will need to copy it into this directory.
+  # IMPORTANT: Generate hardware-configuration.nix with:
+  # sudo nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix
   imports = [
     ./hardware-configuration.nix
-    inputs.impermanence.nixosModules.impermanence
+    # inputs.impermanence.nixosModules.impermanence  # Disabled for standard filesystems
   ];
 
   # Set the hostname for this machine
@@ -21,13 +21,14 @@
   # Enable SSH
   services.openssh.enable = true;
 
-  # Persist important directories using impermanence
-  environment.persistence."/persist" = {
-    directories = [
-      "/var/lib"
-      "/var/log"
-    ];
-  };
+  # NOTE: Impermanence disabled for standard VM/desktop setups
+  # Uncomment and configure for btrfs with impermanence:
+  # environment.persistence."/persist" = {
+  #   directories = [
+  #     "/var/lib"
+  #     "/var/log"
+  #   ];
+  # };
 
   # This value should be set for each machine.
   system.stateVersion = "25.05";
