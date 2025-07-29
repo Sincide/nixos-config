@@ -32,7 +32,15 @@ fi
 swww img "$wallpaper_path" --transition-type wipe --transition-duration 1
 
 # Generate theme with matugen
+echo "🎨 Generating theme colors..."
 matugen image "$wallpaper_path" --variant dark --json-format hex
+
+# Ensure waybar colors are generated
+if [[ -f "templates/waybar.css" ]]; then
+    echo "  • Generating waybar colors..."
+    # Generate waybar colors manually if matugen config doesn't handle it
+    matugen image "$wallpaper_path" --variant dark --json-format hex -t templates/waybar.css > dotfiles/waybar/colors.css
+fi
 
 # Reload applications to pick up new colors
 echo "🔄 Reloading applications with new theme..."
@@ -71,6 +79,10 @@ nohup waybar -c ~/nixos-config/dotfiles/waybar/config-bottom -s ~/nixos-config/d
 
 # Give waybar time to start
 sleep 1
+
+# Force waybar to reload CSS by sending SIGUSR2 signal
+echo "  • Forcing waybar CSS reload..."
+pkill -SIGUSR2 waybar 2>/dev/null || true
 
 # Restart Dunst
 if pgrep -x dunst > /dev/null; then
