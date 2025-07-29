@@ -1,6 +1,14 @@
 // Niri configuration file in KDL format.
 // See https://github.com/YaLTeR/niri/blob/main/doc/config.kdl for all options.
 
+// Startup applications
+startup {
+    spawn "waybar" "-c" "~/nixos-config/dotfiles/waybar/config" "-s" "~/nixos-config/dotfiles/waybar/style.css"
+    spawn "waybar" "-c" "~/nixos-config/dotfiles/waybar/config-bottom" "-s" "~/nixos-config/dotfiles/waybar/style-bottom.css"
+    spawn "dunst"
+    spawn "swww-daemon"
+}
+
 // Set a modifier key. "Super" is the Windows/Command key.
 modifiers "Super"
 
