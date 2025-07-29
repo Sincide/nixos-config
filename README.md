@@ -1,7 +1,8 @@
 # NixOS Configuration
 
-This repository contains my NixOS setup built around the Hyprland window manager.
-It is organised as a flake so multiple machines can reuse the same configuration.
+This repository contains my personal NixOS setup built around the Hyprland window
+manager.  The configuration is packaged as a flake so it can be reused on
+multiple machines with minimal changes.
 
 ## Features
 
@@ -12,23 +13,45 @@ It is organised as a flake so multiple machines can reuse the same configuration
 - **Automatic host discovery** – any directory under `hosts/` becomes a build target.
 - **Pre‑commit hook** checks that every host has a `hardware-configuration.nix` file.
 
-## Getting started
+## Quick start
 
-1. Clone this repository on a fresh NixOS installation.
-2. Generate hardware information for your machine and commit it:
+1. **Clone the repository**
    ```bash
-   sudo nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix
-   git add hosts/nixos/hardware-configuration.nix
+   git clone https://github.com/sadjow/nixos-config.git ~/nixos-config
+   cd ~/nixos-config
+   ```
+
+2. **Create a host directory** named after your machine and copy the example configuration
+   ```bash
+   mkdir hosts/<hostname>
+   cp hosts/nixos/configuration.nix hosts/<hostname>/
+   ```
+
+3. **Generate and commit the hardware configuration**
+   ```bash
+   sudo nixos-generate-config --show-hardware-config > hosts/<hostname>/hardware-configuration.nix
+   git add hosts/<hostname>/hardware-configuration.nix
    git commit -m "Add hardware configuration"
    ```
-3. Build and switch to the configuration:
+
+4. **Set your username**
+   Edit `flake.nix` and change the `username` variable from `martin` to your login name. Update your Git name and email in `home.nix`.
+
+5. **Enable the pre‑commit hook** (optional but recommended)
    ```bash
-   sudo nixos-rebuild switch --flake .#nixos
+   git config core.hooksPath .githooks
    ```
 
-The configuration expects a user called `martin` by default. If your user name is
-different, update the `username` value in `flake.nix` and related files in
-`hosts/common.nix` and `home.nix`.
+6. **Build and activate the system**
+   ```bash
+   sudo nixos-rebuild switch --flake .#<hostname>
+   ```
+
+7. **Install example wallpapers** (optional)
+   ```bash
+   ./setup-wallpapers.sh
+   ```
+   Once logged in you can press <kbd>Super+W</kbd> to choose a wallpaper and regenerate the theme.
 
 ## Repository layout
 
@@ -46,8 +69,13 @@ The wallpaper selector script in `wallpaper-selector` lists images from
 
 ## Customisation
 
-Edit `home.nix` to add packages or change shell aliases. Desktop settings are in
-`dotfiles/`; see `docs/customization.md` for an overview of the most common
-files to tweak.
+Most day‑to‑day changes are done through the following files:
+
+- `home.nix` – add extra packages or shell aliases.
+- `hosts/<hostname>/configuration.nix` – machine specific options.
+- `dotfiles/` – actual configuration files for Hyprland, Waybar, Kitty and more.
+
+See `docs/customization.md` for a detailed walkthrough of how to modify these
+files.
 
 Recent changes and improvements are described in `docs/changes.md`.
