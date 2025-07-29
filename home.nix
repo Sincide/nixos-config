@@ -61,7 +61,6 @@
 
   # Import modules
   imports = [
-    inputs.matugen.nixosModules.default
     ./modules/hyprland.nix
     ./modules/waybar.nix
     ./modules/kitty.nix
@@ -69,6 +68,7 @@
     ./modules/dunst.nix
     ./modules/niri.nix
     ./modules/swappy.nix
+    inputs.matugen.nixosModules.default
   ];
 
   modules.hyprland.enable = true;
