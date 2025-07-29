@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+scripts/check-hardware.sh || {
+  echo "Hardware configuration missing" >&2
+  exit 1
+}

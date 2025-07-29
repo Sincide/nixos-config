@@ -15,8 +15,11 @@ This repository contains a complete NixOS configuration with Hyprland desktop en
 - **Screenshots**: Swappy screenshot tool with Grim
 - **Fonts**: Fira Code Nerd Font for terminal/coding
 - **Swedish Keyboard Layout**: Configured for Swedish users
-- **Modular Configuration**: Easy-to-customize Hyprland config structure
+- **Modular Configuration**: Dotfiles are shipped as optional modules for Hyprland, Waybar and more
 - **Declarative Git**: Username and email configured automatically
+- **Auto Host Discovery**: New hosts are picked up automatically from `hosts/`
+- **SWWW Service**: A systemd user service starts the wallpaper daemon on login
+- **Pre-commit Check**: Prevents commits missing `hardware-configuration.nix`
 
 ## Prerequisites
 
@@ -60,6 +63,12 @@ sudo nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configu
 # CRITICAL: Add the hardware config to Git (flakes require this!)
 git add hosts/nixos/hardware-configuration.nix
 git commit -m "Add hardware configuration for this machine"
+```
+
+Set the provided pre-commit hook so builds fail if the hardware config is missing:
+
+```bash
+git config core.hooksPath .githooks
 ```
 
 ### Step 4: Update User Configuration (If Needed)
@@ -222,31 +231,12 @@ nixos-config/
 - Common layouts: `us`, `uk`, `de`, `fr`
 
 ### Username Issues
-- If your username isn't "martin", update all references in:
-  - `hosts/common.nix` 
-  - `flake.nix`
-  - `home.nix`
+- If your username isn't "martin", change the `username` value in `flake.nix`.
 
 ## Customization
 
-### Adding Packages
-Add packages to `home.nix` in the `home.packages` section.
-
-### Git Configuration
-Your Git username and email are configured declaratively in `home.nix`. No need to run `git config` commands manually!
-
-### Desktop Tweaks
-- **Hyprland**: Edit individual config files in `dotfiles/hypr/conf/`:
-  - `monitors.conf` - Your multi-monitor setup
-  - `keybinds.conf` - Keyboard shortcuts
-  - `general.conf` - Gaps, borders, layout
-  - `decoration.conf` - Visual effects, blur, shadows
-  - `animations.conf` - Animation settings
-- **Waybar**: Edit `dotfiles/waybar/config` and `dotfiles/waybar/style.css`
-- **Terminal**: Edit `dotfiles/kitty/kitty.conf`
-
-### System Settings
-Edit `hosts/common.nix` for system-wide changes that apply to all machines.
+See [docs/customization.md](docs/customization.md) for tips on tweaking the configuration, adding packages and adjusting desktop settings.
+See [docs/changes.md](docs/changes.md) for a summary of the latest improvements.
 
 ## Advanced: Multiple Machines
 
